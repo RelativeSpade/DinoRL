@@ -1,13 +1,20 @@
+import numpy as np
 from gym import Env
+from gym.spaces import Box, Discrete
 
 
 class WebGame(Env):
     # Setup the environment
     def __init__(self):
-        pass
+        # Subclass
+        super().__init__()
+        # Setup spaces
+        self.observation_space = Box(low=0, high=255, shape=(1, 83, 100), dtype=np.uint8)
+        self.action_space = Discrete(3)
 
     # Called to do something in the game
     def step(self, action):
+        # Action key - 0 = JUMP, 1 = DOWN, 2 = NOOP
         pass
 
     # Restart the game
