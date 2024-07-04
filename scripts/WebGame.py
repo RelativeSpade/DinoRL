@@ -18,7 +18,7 @@ class WebGame(Env):
         # Define extraction parameters
         self.cap = mss()
         self.game_location = {'top': 300, 'left': 1920, 'width': 600, 'height': 500}
-        self.done_location = {'top': 355, 'left': 2550, 'width': 660, 'height': 70}
+        self.done_location = {'top': 350, 'left': 2550, 'width': 660, 'height': 70}
 
     # Called to do something in the game
     def step(self, action):
