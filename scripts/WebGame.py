@@ -1,9 +1,13 @@
+import time
+
 import cv2
 import numpy as np
+import pydirectinput
 from gym import Env
 from gym.spaces import Box, Discrete
 from mss import mss
 from pytesseract import pytesseract
+
 pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
@@ -21,21 +25,48 @@ class WebGame(Env):
         self.done_location = {'top': 350, 'left': 2550, 'width': 660, 'height': 70}
 
     # Called to do something in the game
-    def step(self, action):
+    def step(self, action: int):
         # Action key - 0 = JUMP, 1 = DOWN, 2 = NOOP
-        pass
+        action_map = {
+            0: 'SPACE',
+            1: 'DOWN',
+            2: 'NOOP'
+        }
+
+        if action != 2:
+            pydirectinput.press(action_map[action])
+
+        # Checking whether game is done
+        done, done_cap = self.get_done()
+        # Get next observation
+        new_observation = self.get_observation()
+        # Reward - we get a point for every frame we're alive
+        reward = 1
+        info = {}
+
+        return new_observation, reward, done, info
 
     # Restart the game
     def reset(self):
-        pass
+        time.sleep(1)
+        pydirectinput.click(2130, 150)
+        pydirectinput.press('SPACE')
+        return self.get_observation()
+
 
     # Closes the game
     def close(self):
-        pass
+        cv2.destroyAllWindows()
 
     # Visualize the Game
     def render(self, **kwargs):
-        pass
+        frame = np.array(self.cap.grab(self.game_location))
+
+        cv2.imshow('Game', frame)
+
+        time.sleep(0.01)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            self.close()
 
     # Get a segment of game to observe
     def get_observation(self):
