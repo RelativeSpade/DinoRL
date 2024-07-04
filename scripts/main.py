@@ -28,6 +28,6 @@ if is_dino_tab_active():
     else:
         model = DQN.load(LATEST_MODEL, env)
 
-    model.learn(total_timesteps=100000, callback=callback)
+    model.learn(total_timesteps=10000, callback=callback)
 else:
     print(f'Dino is not open')
