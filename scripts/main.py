@@ -15,6 +15,6 @@ from gym.spaces import Box, Discrete
 from scripts.WebGame import WebGame
 
 env = WebGame()
-plt.imshow(cv2.cvtColor(env.get_observation()[0], cv2.COLOR_BGR2RGB))
+plt.imshow(env.get_done())
 plt.show()
 

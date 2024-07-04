@@ -3,6 +3,7 @@ import numpy as np
 from gym import Env
 from gym.spaces import Box, Discrete
 from mss import mss
+from pytesseract import pytesseract
 
 
 class WebGame(Env):
@@ -49,4 +50,14 @@ class WebGame(Env):
 
     # Get the "Game Over" text
     def get_done(self):
-        pass
+        # Get done screen
+        done_cap = np.array(self.cap.grab(self.done_location))[:, :, :3].astype(np.uint8)
+        # Valid done text
+        done_strings = ['GAME', 'GAHE']
+
+        done = False
+        res = pytesseract.image_to_string(done_cap)[:4]
+        if res in done_strings:
+            done = True
+
+        return done, done_cap
