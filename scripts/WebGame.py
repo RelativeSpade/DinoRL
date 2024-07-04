@@ -14,6 +14,10 @@ class WebGame(Env):
     def reset(self):
         pass
 
+    # Closes the game
+    def close(self):
+        pass
+
     # Visualize the Game
     def render(self):
         pass
