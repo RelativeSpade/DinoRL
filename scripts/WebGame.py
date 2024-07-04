@@ -4,6 +4,7 @@ from gym import Env
 from gym.spaces import Box, Discrete
 from mss import mss
 from pytesseract import pytesseract
+pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
 
 
 class WebGame(Env):
@@ -17,7 +18,7 @@ class WebGame(Env):
         # Define extraction parameters
         self.cap = mss()
         self.game_location = {'top': 300, 'left': 1920, 'width': 600, 'height': 500}
-        self.done_location = {'top': 405, 'left': 2550, 'width': 660, 'height': 70}
+        self.done_location = {'top': 355, 'left': 2550, 'width': 660, 'height': 70}
 
     # Called to do something in the game
     def step(self, action):
@@ -33,7 +34,7 @@ class WebGame(Env):
         pass
 
     # Visualize the Game
-    def render(self):
+    def render(self, **kwargs):
         pass
 
     # Get a segment of game to observe

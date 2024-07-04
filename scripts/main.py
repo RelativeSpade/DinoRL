@@ -15,6 +15,8 @@ from gym.spaces import Box, Discrete
 from scripts.WebGame import WebGame
 
 env = WebGame()
-plt.imshow(env.get_done())
-plt.show()
+done, done_cap = env.get_done()
 
+print(done)
+plt.imshow(done_cap)
+plt.show()
