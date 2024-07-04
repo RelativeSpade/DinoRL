@@ -53,7 +53,6 @@ class WebGame(Env):
         pydirectinput.press('SPACE')
         return self.get_observation()
 
-
     # Closes the game
     def close(self):
         cv2.destroyAllWindows()
