@@ -23,8 +23,6 @@ for episodes in range(10):
         if isinstance(action, np.ndarray):
             action = action.item()
 
-        print(f"Action: {action} (type: {type(action)})")
-
         obs, reward, done, info = env.step(action)
         time.sleep(0.05)
         total_reward += reward
